@@ -1,3 +1,12 @@
+INSERT INTO Food.Category (CategoryName)
+VALUES
+(N'غذای ایرانی'),
+(N'فست فود'),
+(N'نوشیدنی'),
+(N'دسر'),
+(N'پیش غذا');
+GO
+
 INSERT INTO Food.Customer
 (FirstName, LastName, PhoneNumber, Email, WalletBalance)
 VALUES
