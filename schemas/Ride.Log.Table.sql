@@ -1,11 +1,28 @@
 USE SnapProject;
 GO
 
-CREATE TABLE Ride.Log
-(
-    LogID INT IDENTITY(1,1) PRIMARY KEY,
-    EventType NVARCHAR(50) NOT NULL,
-    Description NVARCHAR(255) NOT NULL,
-    EventTime DATETIME NOT NULL DEFAULT GETDATE()
-);
+ALTER TRIGGER Ride.trg_UpdateTripFare
+ON Ride.RidePayment
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE t
+    SET FinalFare = i.Amount
+    FROM Ride.Trip t
+    INNER JOIN inserted i
+        ON t.TripID = i.TripID
+    WHERE i.PaymentStatus = 'Paid';
+
+    INSERT INTO Ride.Log
+    (
+        EventType,
+        Description
+    )
+    SELECT
+        'Payment',
+        CONCAT('Payment registered for TripID ', TripID)
+    FROM inserted;
+END;
 GO

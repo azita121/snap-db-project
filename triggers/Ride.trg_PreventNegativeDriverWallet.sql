@@ -1,7 +1,7 @@
 USE SnapProject;
 GO
 
-CREATE TRIGGER Ride.trg_PreventNegativeDriverWallet
+ALTER TRIGGER Ride.trg_PreventNegativeDriverWallet
 ON Ride.Driver
 AFTER UPDATE
 AS
@@ -18,5 +18,17 @@ BEGIN
         RAISERROR('Driver wallet balance cannot be negative.',16,1);
         ROLLBACK TRANSACTION;
     END
+
+    INSERT INTO Ride.Log
+    (
+        EventType,
+        Description
+    )
+    VALUES
+    (
+        'Wallet Check',
+        'Driver wallet validation executed.'
+    );
+
 END;
 GO
