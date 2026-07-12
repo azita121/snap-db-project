@@ -1,9 +1,9 @@
 USE SnapProject;
 GO
 
-CREATE TRIGGER Food.trg_SetOrderTotal
+ALTER TRIGGER Food.trg_SetOrderTotal
 ON Food.OrderItem
-AFTER INSERT
+AFTER INSERT, UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -18,5 +18,16 @@ BEGIN
     FROM Food.CustomerOrder co
     INNER JOIN inserted i
         ON co.OrderID = i.OrderID;
+
+    INSERT INTO Food.Log
+    (
+        EventType,
+        Description
+    )
+    سVALUES
+    (
+        'Order Total',
+        'Order total calculated automatically.'
+    );
 END;
 GO

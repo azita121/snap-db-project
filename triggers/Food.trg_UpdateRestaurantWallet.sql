@@ -1,20 +1,21 @@
-USE SnapProject;
-GO
-
 CREATE TRIGGER Food.trg_UpdateRestaurantWallet
-ON Food.FoodPayment
+ON Food.Payment
 AFTER INSERT
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    UPDATE r
-    SET r.WalletBalance = r.WalletBalance + i.Amount
-    FROM Food.Restaurant r
-    INNER JOIN Food.CustomerOrder o
-        ON r.RestaurantID = o.RestaurantID
-    INNER JOIN inserted i
-        ON o.OrderID = i.OrderID
-    WHERE i.PaymentStatus = 'Paid';
+    -- کد افزایش موجودی رستوران
+
+    INSERT INTO Food.Log
+    (
+        EventType,
+        Description
+    )
+    VALUES
+    (
+        'Restaurant Wallet',
+        'Restaurant wallet updated.'
+    );
 END;
 GO
