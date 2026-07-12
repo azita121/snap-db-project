@@ -1,0 +1,11 @@
+USE SnapProject;
+GO
+
+CREATE TABLE Ride.Log
+(
+    LogID INT IDENTITY(1,1) PRIMARY KEY,
+    EventType NVARCHAR(50) NOT NULL,
+    Description NVARCHAR(255) NOT NULL,
+    EventTime DATETIME NOT NULL DEFAULT GETDATE()
+);
+GO
