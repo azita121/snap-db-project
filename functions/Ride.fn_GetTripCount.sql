@@ -1,0 +1,1 @@
+SELECT Ride.fn_GetTripCount(1);
