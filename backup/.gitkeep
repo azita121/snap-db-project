@@ -1,0 +1,2 @@
+# SnapDB backup placeholder
+# Run sql/05_Backup.sql after loading the database to generate SnapDB.bak here.
