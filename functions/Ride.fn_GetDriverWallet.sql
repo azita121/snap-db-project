@@ -1,1 +1,0 @@
-SELECT Ride.fn_GetDriverWallet(1);

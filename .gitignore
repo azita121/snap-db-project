@@ -1,0 +1,35 @@
+# Build artifacts
+*.bak
+backup/*.bak
+
+# SQL Server
+*.ldf
+*.mdf
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.sqlite
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+
+# PDF output
+docs/*.pdf
+
+# Temp
+tmp/
+temp/
+*.tmp
